@@ -11,6 +11,9 @@ public class ObjectThrower : MonoBehaviour
     private GameObject ball;
     private bool holding;
     private Vector3 newPosition;
+    private Vector3 lastPosition;
+    private float swipeStartTime;
+    private float swipeEndTime;
 
     private void OnEnable()
     {
@@ -49,6 +52,9 @@ public class ObjectThrower : MonoBehaviour
         ball = Instantiate(BallPrefab, newPosition, Quaternion.identity);
 
         ball.GetComponent<Rigidbody>().useGravity = false;
+
+        lastPosition = newPosition;
+        swipeStartTime = Time.time;
     }
 
     private void PickupBall()
@@ -57,13 +63,36 @@ public class ObjectThrower : MonoBehaviour
         touchPos.z = Camera.main.nearClipPlane * 3f;
         newPosition = Camera.main.ScreenToWorldPoint(touchPos);
         ball.transform.position = Vector3.Lerp(ball.transform.position, newPosition, 80f * Time.deltaTime);
+
+        // Update the last position and swipe time
+        lastPosition = newPosition;
+        swipeEndTime = Time.time;
     }
 
     private void ThrowBall()
     {
         if (!holding) return;
 
-        // Complete code
+        holding = false;
+
+        // Calculate swipe direction and velocity
+        Vector3 swipeVelocity = (newPosition - lastPosition) / (swipeEndTime - swipeStartTime);
+
+        // Normalize swipe direction
+        swipeVelocity = swipeVelocity.normalized;
+
+        // Add a forward force to ensure the ball goes forward in 3D space
+        Vector3 forwardForce = Camera.main.transform.forward * 5f; // Adjust this multiplier to control forward force
+
+        // Combine swipe direction with forward force
+        Vector3 throwDirection = (swipeVelocity + forwardForce).normalized * 10f; // Adjust this multiplier to control throw force
+
+        Rigidbody ballRigidbody = ball.GetComponent<Rigidbody>();
+        ballRigidbody.useGravity = true;
+        ballRigidbody.AddForce(throwDirection, ForceMode.VelocityChange);
+
+        // Reset variables
+        ball = null;
     }
 
     private void AddEventTriggerListener(GameObject target, EventTriggerType eventType, Action<BaseEventData> callback)
