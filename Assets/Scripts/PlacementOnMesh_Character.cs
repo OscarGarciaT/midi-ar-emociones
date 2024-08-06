@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
+using MIDI;
 
 public class PlacementOnMesh_Character : MonoBehaviour
 {
@@ -14,31 +14,21 @@ public class PlacementOnMesh_Character : MonoBehaviour
 
     public static event Action characterPlaced;
 
-    private InputActions gameInput;
-
     private void OnEnable()
     {
-        gameInput = new InputActions();
-
-        gameInput.Gameplay.Touch.performed += OnTouch;
-        //gameInput.Gameplay.Click.performed += OnClick;
-
-        gameInput.Gameplay.Enable();
+        TouchManager.Instance.OnTouchStart += OnTouch;
     }
 
     private void OnDisable()
     {
-        gameInput.Gameplay.Touch.performed -= OnTouch;
-        //gameInput.Gameplay.Click.performed -= OnClick;
-
-        gameInput.Gameplay.Disable();
+        TouchManager.Instance.OnTouchStart -= OnTouch;
     }
 
-    private void OnTouch(InputAction.CallbackContext context)
+    private void OnTouch()
     {
         if (isPlaced) return;
 
-        Vector2 touchPosition = context.ReadValue<Vector2>();
+        Vector2 touchPosition = TouchManager.Instance.TouchPosition;
 
         PointerEventData pointerData = new PointerEventData(EventSystem.current)
         {
@@ -50,26 +40,10 @@ public class PlacementOnMesh_Character : MonoBehaviour
 
         if (results.Count > 0)
         {
-            Debug.Log("We hit a UI Element");
             return;
         }
 
         TouchToRay(touchPosition);
-    }
-
-    private void OnClick(InputAction.CallbackContext context)
-    {
-        if (isPlaced) return;
-
-        Vector2 clickPosition = context.ReadValue<Vector2>();
-
-        if (EventSystem.current.IsPointerOverGameObject())
-        {
-            Debug.Log("UI Hit was recognized");
-            return;
-        }
-
-        TouchToRay(clickPosition);
     }
 
     private void TouchToRay(Vector2 position)
