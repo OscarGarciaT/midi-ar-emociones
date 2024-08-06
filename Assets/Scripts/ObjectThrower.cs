@@ -7,6 +7,9 @@ public class ObjectThrower : MonoBehaviour
 {
     [SerializeField] private GameObject BallPrefab;
     [SerializeField] private GameObject UIButton;
+    [SerializeField] private float forwardForceMultiplier = 2f;
+    [SerializeField] private float throwForceMultiplier = 2f;
+    [SerializeField] private float ballDestroyDelay = 2f;
 
     private GameObject ball;
     private bool holding;
@@ -78,21 +81,41 @@ public class ObjectThrower : MonoBehaviour
         // Calculate swipe direction and velocity
         Vector3 swipeVelocity = (newPosition - lastPosition) / (swipeEndTime - swipeStartTime);
 
-        // Normalize swipe direction
-        swipeVelocity = swipeVelocity.normalized;
+        // Ensure the velocity is significant
+        if (swipeVelocity.magnitude < 0.1f)
+        {
+            swipeVelocity = Camera.main.transform.forward;
+        }
 
-        // Add a forward force to ensure the ball goes forward in 3D space
-        Vector3 forwardForce = Camera.main.transform.forward * 5f; // Adjust this multiplier to control forward force
+        // Adjust forward force based on swipe speed
+        Vector3 forwardForce = Camera.main.transform.forward * swipeVelocity.magnitude * forwardForceMultiplier;
 
         // Combine swipe direction with forward force
-        Vector3 throwDirection = (swipeVelocity + forwardForce).normalized * 10f; // Adjust this multiplier to control throw force
+        Vector3 throwDirection = (swipeVelocity + forwardForce).normalized * swipeVelocity.magnitude * throwForceMultiplier;
 
         Rigidbody ballRigidbody = ball.GetComponent<Rigidbody>();
         ballRigidbody.useGravity = true;
         ballRigidbody.AddForce(throwDirection, ForceMode.VelocityChange);
 
-        // Reset variables
-        ball = null;
+        // Start coroutine to destroy ball after a delay
+        StartCoroutine(DestroyBallAfterDelay(ballDestroyDelay));
+    }
+
+    private System.Collections.IEnumerator DestroyBallAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (ball != null)
+        {
+            Destroy(ball);
+            ball = null;
+        }
+
+        // Reset the UI button
+        UIButton.SetActive(true);
+
+        // Reset other necessary variables if any
+        holding = false;
     }
 
     private void AddEventTriggerListener(GameObject target, EventTriggerType eventType, Action<BaseEventData> callback)

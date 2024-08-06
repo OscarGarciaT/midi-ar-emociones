@@ -526,6 +526,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BallPrefab: {fileID: 9126960406845828832, guid: 9b338aacdffc2ea45be1c1ff9ccac79b, type: 3}
   UIButton: {fileID: 784505818}
+  forwardForceMultiplier: 5
+  throwForceMultiplier: 5
+  ballDestroyDelay: 2
 --- !u!1 &664520046
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,7 +830,7 @@ RectTransform:
   m_GameObject: {fileID: 784505818}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 686114699}
@@ -836,7 +839,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 121.33}
+  m_AnchoredPosition: {x: 0, y: 60}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &784505820
