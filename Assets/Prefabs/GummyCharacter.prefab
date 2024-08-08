@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3253173605282303982
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 576023345697432232}
+  m_Layer: 0
+  m_Name: SoundOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &576023345697432232
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3253173605282303982}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.621, z: 0.172}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5427456079878715341}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9077853247408831647
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,6 +43,7 @@ GameObject:
   - component: {fileID: 4721184851975803474}
   - component: {fileID: 5337306784723472471}
   - component: {fileID: 4038581330060289172}
+  - component: {fileID: 7319359969026903188}
   m_Layer: 0
   m_Name: GummyCharacter
   m_TagString: Untagged
@@ -32,6 +64,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5340855738843106514}
+  - {fileID: 576023345697432232}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -80,6 +113,30 @@ MonoBehaviour:
   agent: {fileID: 5337306784723472471}
   animator: {fileID: 2089295481860806312}
   rotationSpeed: 5
+--- !u!114 &7319359969026903188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9077853247408831647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98ff4a3bf6479e949b25f5567e68e1f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BehaviorState: 0
+  DisableBehaviors: 0
+  behaviors:
+  - {fileID: 11400000, guid: 8cd38548c2812f64c97f373381e0b3de, type: 2}
+  - {fileID: 11400000, guid: 1b743902e5de88e4ca9674680de2c9a2, type: 2}
+  - {fileID: 11400000, guid: b6eda6de4f150764d983d84d8d246efb, type: 2}
+  currentBehavior: {fileID: 0}
+  animator: {fileID: 2089295481860806312}
+  soundOrigin: {fileID: 576023345697432232}
+  minTimeBetweenBehaviors: 5
+  maxTimeBetweenBehaviors: 10
+  victoryStateName: Victory
 --- !u!1001 &5590161766226389817
 PrefabInstance:
   m_ObjectHideFlags: 0

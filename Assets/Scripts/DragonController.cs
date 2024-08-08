@@ -14,14 +14,11 @@ public class DragonController : MonoBehaviour
         {
             animator.SetBool("isWalking", false);
 
-            // Get the direction to the main camera
             Vector3 direction = Camera.main.transform.position - transform.position;
-            direction.y = 0; // Keep only the horizontal direction
+            direction.y = 0;
 
-            // Calculate the target rotation
             Quaternion targetRotation = Quaternion.LookRotation(direction);
 
-            // Smoothly rotate towards the target rotation
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
         else if (agent.State == LightshipNavMeshAgent.AgentNavigationState.HasPath)

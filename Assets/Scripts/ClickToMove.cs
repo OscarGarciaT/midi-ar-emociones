@@ -26,7 +26,6 @@ public class ClickToMove : MonoBehaviour
         PlacementOnMesh_Character.characterPlaced += StartAfterPlacement;
     }
 
-
     private void StartAfterPlacement()
     {
         agent = GameObject.FindObjectOfType<LightshipNavMeshAgent>();
@@ -47,6 +46,12 @@ public class ClickToMove : MonoBehaviour
                 Debug.Log("UI Hit was recognized");
                 return;
             }
+
+            if (BehaviorManager.Instance.BehaviorState == BehaviorState.HasBehavior)
+            {
+                return;
+            }
+
             TouchToRay(Input.mousePosition);
         }
 #endif
@@ -77,6 +82,12 @@ public class ClickToMove : MonoBehaviour
             {
                 return;
             }
+
+            if (BehaviorManager.Instance.BehaviorState == BehaviorState.HasBehavior)
+            {
+                return;
+            }
+
             TouchToRay(touch.position);
         }
 #endif
@@ -115,5 +126,12 @@ public class ClickToMove : MonoBehaviour
             wayPoints.Add(hit.point);
             isPlaced = true;
         }
+    }
+
+    public void StopAndClearMovement()
+    {
+        wayPoints.Clear();
+        currentWayPointIndex = 0;
+        agent.StopMoving();
     }
 }
