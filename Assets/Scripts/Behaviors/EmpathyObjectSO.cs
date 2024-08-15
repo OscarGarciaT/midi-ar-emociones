@@ -14,4 +14,6 @@ public class EmpathyObjectSO : ScriptableObject
     public AudioClip objectAudio;
 
     public EmotionBehaviorType relatedBehaviorType;
+
+    public GameObject ball3DPrefab;
 }

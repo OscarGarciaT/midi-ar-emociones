@@ -17,3 +17,4 @@ MonoBehaviour:
   objectSprite: {fileID: 21300000, guid: b7864d501bae4ef4a9efd45705fd362f, type: 3}
   objectAudio: {fileID: 0}
   relatedBehaviorType: 2
+  ball3DPrefab: {fileID: 9126960406845828832, guid: 0b2eec3d7f9dde744a90865bfe1845b0, type: 3}

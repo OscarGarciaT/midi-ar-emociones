@@ -21,13 +21,14 @@ public class ObjectThrower : MonoBehaviour
     private void OnEnable()
     {
         TouchManager.Instance.OnTouchEnd += ThrowBall;
+        GameManager.Instance.OnThrowObjectChange += (EmpathyObjectSO newObject) => BallPrefab = newObject.ball3DPrefab;
         AddEventTriggerListener(UIButton, EventTriggerType.PointerDown, OnUIButtonClick);
     }
 
     private void OnDisable()
     {
-        TouchManager.Instance.OnTouchEnd -= ThrowBall;
-        RemoveEventTriggerListener(UIButton, EventTriggerType.PointerDown, OnUIButtonClick);
+        //TouchManager.Instance.OnTouchEnd -= ThrowBall;
+        //RemoveEventTriggerListener(UIButton, EventTriggerType.PointerDown, OnUIButtonClick);
     }
 
     private void Update()

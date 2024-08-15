@@ -15,4 +15,4 @@ MonoBehaviour:
   emotionEventName: CansancioSilla
   animationState: Tired
   audio: {fileID: 0}
-  type: 0
+  type: 2
