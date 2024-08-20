@@ -14,6 +14,8 @@ public class ThrowableObject : MonoBehaviour
         if (behaviorManager != null)
         {
             behaviorManager.CheckEmpathyObject(empathyObject);
+
+            Destroy(gameObject);
         }
     }
 }

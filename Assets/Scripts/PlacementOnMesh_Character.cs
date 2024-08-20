@@ -54,6 +54,7 @@ public class PlacementOnMesh_Character : MonoBehaviour
             placedObjects.Add(Instantiate(placementObject, hit.point, Quaternion.FromToRotation(transform.up, hit.normal)));
             isPlaced = true;
             characterPlaced?.Invoke();
+            GameManager.Instance.GameUI();
         }
     }
 }

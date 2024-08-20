@@ -22,7 +22,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        GameUI();
+        GameInitialized();
+
+        AudioManager.Instance.PlayMusic("main-theme");
     }
 
     public void GameInitialized()

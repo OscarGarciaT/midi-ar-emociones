@@ -98,6 +98,8 @@ public class ObjectThrower : MonoBehaviour
         ballRigidbody.useGravity = true;
         ballRigidbody.AddForce(throwDirection, ForceMode.VelocityChange);
 
+        AudioManager.Instance.PlaySFX("throw");
+
         // Start coroutine to destroy ball after a delay
         StartCoroutine(DestroyBallAfterDelay(ballDestroyDelay));
     }

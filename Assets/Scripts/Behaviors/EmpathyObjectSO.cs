@@ -16,4 +16,6 @@ public class EmpathyObjectSO : ScriptableObject
     public EmotionBehaviorType relatedBehaviorType;
 
     public GameObject ball3DPrefab;
+
+    public string victoryState = "Victory";
 }

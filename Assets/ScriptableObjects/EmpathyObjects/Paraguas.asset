@@ -18,3 +18,4 @@ MonoBehaviour:
   objectAudio: {fileID: 0}
   relatedBehaviorType: 1
   ball3DPrefab: {fileID: 9126960406845828832, guid: ab28070f70a2bd84c96ca9815fe47ad5, type: 3}
+  victoryState: VictoryParaguas

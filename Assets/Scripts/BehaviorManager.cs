@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -88,12 +89,28 @@ public class BehaviorManager : MonoBehaviour
         Debug.Log("Checking empathy object");
         Debug.Log($"Object: {empathyObject.relatedBehaviorType}, Current Behavior: {currentBehavior.type}");
 
+        // Play grab object animation, and after execute logic below
         if (currentBehavior != null && empathyObject.relatedBehaviorType == currentBehavior.type)
         {
-            PlayAnimatorState(victoryStateName);
+            PlayAnimatorState(empathyObject.victoryState);
             currentBehavior = null;
             triggeredBehaviors.Clear();
             ScheduleNextBehavior();
+        }
+        else
+        {
+            PlayAnimatorState("desagrado");
+            // then play the animation of the current behavior after desagrado has finished --> PlayAnimatorState(currentBehavior.animationState);
+
+            // Use DOTween to wait for the "desagrado" animation to finish, then play the current behavior's animation
+            float desagradoAnimationLength = animator.GetCurrentAnimatorStateInfo(0).length;
+            DOVirtual.DelayedCall(desagradoAnimationLength, () =>
+            {
+                if (currentBehavior != null)
+                {
+                    PlayAnimatorState(currentBehavior.animationState);
+                }
+            });
         }
     }
 }
