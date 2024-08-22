@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,12 @@ public class GameManager : MonoBehaviour
     public Action OnGameStarted;
     public Action OnItemsMenu;
     public Action<EmpathyObjectSO> OnThrowObjectChange;
+    public Action OnEndGameUI;
+
+    [SerializeField] private int goalCount = 1; // Customizable goal, default is 1
+    private int correctEmpathyObjectCount = 0;
+
+    public bool GameEnded = false;
 
     private void Awake()
     {
@@ -55,5 +62,26 @@ public class GameManager : MonoBehaviour
     public void ThrowObjectChange(EmpathyObjectSO newObject)
     {
         OnThrowObjectChange?.Invoke(newObject);
+    }
+
+    public void IncrementCorrectEmpathyObjectCount()
+    {
+        correctEmpathyObjectCount++;
+        if (correctEmpathyObjectCount >= goalCount)
+        {
+            TriggerEndGameUI();
+        }
+    }
+
+    private void TriggerEndGameUI()
+    {
+        OnEndGameUI?.Invoke();
+
+        GameEnded = true;
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

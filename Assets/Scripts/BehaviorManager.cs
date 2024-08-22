@@ -61,6 +61,8 @@ public class BehaviorManager : MonoBehaviour
 
     private void TriggerRandomBehavior()
     {
+        if (GameManager.Instance.GameEnded) return;
+
         List<EmotionBehaviorSO> untriggeredBehaviors = behaviors.FindAll(b => !triggeredBehaviors.Contains(b));
 
         if (untriggeredBehaviors.Count > 0)

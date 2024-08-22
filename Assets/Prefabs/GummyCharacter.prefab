@@ -5027,6 +5027,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Paraguas
       objectReference: {fileID: 0}
+    - target: {fileID: 8077617202365072151, guid: 824f04467a97de64f95dc9e63452d834, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8886348224911006125, guid: 824f04467a97de64f95dc9e63452d834, type: 3}
       propertyPath: m_RootOrder
       value: 1

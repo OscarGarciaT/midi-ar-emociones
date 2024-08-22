@@ -26,6 +26,10 @@ public class ClickToMove : MonoBehaviour
         PlacementOnMesh_Character.characterPlaced += StartAfterPlacement;
     }
 
+    private void OnDestroy()
+    {
+        PlacementOnMesh_Character.characterPlaced -= StartAfterPlacement;
+    }
     private void StartAfterPlacement()
     {
         agent = GameObject.FindObjectOfType<LightshipNavMeshAgent>();

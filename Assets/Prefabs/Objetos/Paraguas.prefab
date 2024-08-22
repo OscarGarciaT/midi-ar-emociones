@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8886348224911006125}
   - component: {fileID: 5547727985633744392}
   - component: {fileID: 7717351703202341570}
+  - component: {fileID: 6396801198804163252}
   m_Layer: 0
   m_Name: Paraguas
   m_TagString: Untagged
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6396801198804163252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8077617202365072151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46846b4126ce2448a5b45ee6cf62fb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScale: {x: 1, y: 1, z: 1}
+  animationDuration: 0.5

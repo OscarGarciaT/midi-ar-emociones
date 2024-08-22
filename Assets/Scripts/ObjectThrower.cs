@@ -27,7 +27,8 @@ public class ObjectThrower : MonoBehaviour
 
     private void OnDisable()
     {
-        //TouchManager.Instance.OnTouchEnd -= ThrowBall;
+        TouchManager.Instance.OnTouchEnd -= ThrowBall;
+        GameManager.Instance.OnThrowObjectChange -= (EmpathyObjectSO newObject) => BallPrefab = newObject.ball3DPrefab;
         //RemoveEventTriggerListener(UIButton, EventTriggerType.PointerDown, OnUIButtonClick);
     }
 
@@ -99,6 +100,7 @@ public class ObjectThrower : MonoBehaviour
         ballRigidbody.AddForce(throwDirection, ForceMode.VelocityChange);
 
         AudioManager.Instance.PlaySFX("throw");
+        ball.GetComponentInChildren<TrailRenderer>().enabled = true;
 
         // Start coroutine to destroy ball after a delay
         StartCoroutine(DestroyBallAfterDelay(ballDestroyDelay));

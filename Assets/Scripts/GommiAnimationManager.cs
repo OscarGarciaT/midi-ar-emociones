@@ -16,13 +16,27 @@ public class GommiAnimationManager : MonoBehaviour
     public void ToggleSilla(float active)
     {
         bool isActive = active != 0;
-        silla.SetActive(isActive);
+
+        if (!isActive)
+        {
+            silla.GetComponent<ObjectAnimationManager>().DisableObject();
+            return;
+        }
+
+        silla.GetComponent<ObjectAnimationManager>().EnableObject();
     }
 
     public void ToggleParaguas(float active)
     {
         bool isActive = active != 0;
-        paraguas.SetActive(isActive);
+
+        if (!isActive)
+        {
+            paraguas.GetComponent<ObjectAnimationManager>().DisableObject();
+            return;
+        }
+
+        paraguas.GetComponent<ObjectAnimationManager>().EnableObject();
     }
 
     public void ToggleZapatos(float active)
@@ -36,5 +50,17 @@ public class GommiAnimationManager : MonoBehaviour
     {
         bool isActive = active != 0;
         rain.SetActive(isActive);
+    }
+
+    public void PlayVictorySFX()
+    {
+        AudioManager.Instance.PlaySFX("victory");
+
+        GameManager.Instance.IncrementCorrectEmpathyObjectCount();
+    }
+
+    public void PlayWrongSFX()
+    {
+        AudioManager.Instance.PlaySFX("wrong");
     }
 }
