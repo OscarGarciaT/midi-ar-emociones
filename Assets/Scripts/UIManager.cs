@@ -6,23 +6,26 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    // GameUI
+    [Header("GameUI")]
     [SerializeField] GameObject GameUI;
     [SerializeField] Button ThrowBallButton;
 
-    // ItemsMenuUI
+    [Header("ItemsMenuUI")]
     [SerializeField] GameObject ItemsMenuUI;
 
-    // StartGameUI
+    [Header("StartGameUI")]
     [SerializeField] GameObject StartGameUI;
 
-    // MainMenuUI
+    [Header("MainMenuUI")]
     [SerializeField] GameObject MainMenuUI;
 
-    // EndGameUI
+    [Header("EndGameUI")]
     [SerializeField] GameObject EndGameUI;
     [SerializeField] Transform popUpBox;
     [SerializeField] Transform popUpGlow;
+
+    [Header("InstructionsUI")]
+    [SerializeField] GameObject InstructionsUI;
 
     private void OnEnable()
     {
@@ -31,6 +34,7 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.OnGameMenu += EnableMainMenuUI;
         GameManager.Instance.OnGameInitialized += EnableStartGameUI;
         GameManager.Instance.OnEndGameUI += EnableEndGameUI;
+        GameManager.Instance.OnInstructionsUI += EnableInstructionsUI;
 
         GameManager.Instance.OnThrowObjectChange += UpdateThrowBallButton;
     }
@@ -58,6 +62,7 @@ public class UIManager : MonoBehaviour
         ItemsMenuUI.SetActive(false);
         StartGameUI.SetActive(false);
         MainMenuUI.SetActive(false);
+        InstructionsUI.SetActive(false);
     }
 
     public void EnableItemsMenuUI()
@@ -66,6 +71,7 @@ public class UIManager : MonoBehaviour
         ItemsMenuUI.SetActive(true);
         StartGameUI.SetActive(false);
         MainMenuUI.SetActive(false);
+        InstructionsUI.SetActive(false);
     }
 
     public void EnableMainMenuUI()
@@ -74,6 +80,7 @@ public class UIManager : MonoBehaviour
         ItemsMenuUI.SetActive(false);
         StartGameUI.SetActive(false);
         MainMenuUI.SetActive(true);
+        InstructionsUI.SetActive(false);
     }
 
     public void EnableStartGameUI()
@@ -82,6 +89,7 @@ public class UIManager : MonoBehaviour
         ItemsMenuUI.SetActive(false);
         StartGameUI.SetActive(true);
         MainMenuUI.SetActive(false);
+        InstructionsUI.SetActive(false);
     }
 
     public void EnableEndGameUI()
@@ -90,6 +98,7 @@ public class UIManager : MonoBehaviour
         ItemsMenuUI.SetActive(false);
         StartGameUI.SetActive(false);
         MainMenuUI.SetActive(false);
+        InstructionsUI.SetActive(false);
 
         EndGameUI.SetActive(true);
 
@@ -102,5 +111,18 @@ public class UIManager : MonoBehaviour
         {
             popUpGlow.DOScale(0.92f, 1f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
         });
+    }
+
+    public void EnableInstructionsUI()
+    {
+        GameUI.SetActive(false);
+        ItemsMenuUI.SetActive(false);
+        StartGameUI.SetActive(false);
+        MainMenuUI.SetActive(false);
+
+        InstructionsUI.SetActive(true);
+
+        InstructionsUI.transform.GetChild(0).localScale = Vector3.zero;
+        InstructionsUI.transform.GetChild(0).DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.5f).SetEase(Ease.OutBack);
     }
 }

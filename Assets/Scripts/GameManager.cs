@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public Action OnItemsMenu;
     public Action<EmpathyObjectSO> OnThrowObjectChange;
     public Action OnEndGameUI;
+    public Action OnInstructionsUI;
 
     [SerializeField] private int goalCount = 1; // Customizable goal, default is 1
     private int correctEmpathyObjectCount = 0;
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        GameInitialized();
+        InstructionsUI();
 
         AudioManager.Instance.PlayMusic("main-theme");
     }
@@ -57,6 +58,11 @@ public class GameManager : MonoBehaviour
     public void ItemsMenu()
     {
         OnItemsMenu?.Invoke();
+    }
+
+    public void InstructionsUI()
+    {
+        OnInstructionsUI?.Invoke();
     }
 
     public void ThrowObjectChange(EmpathyObjectSO newObject)
